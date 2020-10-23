@@ -1,4 +1,6 @@
-﻿namespace Game.Generation
+﻿using UnityEngine;
+
+namespace Game.Generation
 {
     public class Chunk
     {
@@ -15,16 +17,20 @@
             _tileMap = new int[width, height];
         }
 
-        public static Chunk GenerateChunk()
+        public static Chunk GenerateChunk(int chunkX)
         {
             Chunk chunk = new Chunk();
-            
-            for (int y = 0; y < chunk.height; y++)
+            for (int x = 0; x < chunk.width; x++)
             {
-                for (int x = 0; x < chunk.width; x++)
+                // Generate the max terrain height for this column
+                int worldX = (chunkX * WorldGenerator.ChunkWidth) - (WorldGenerator.ChunkWidth / 2) + x;
+                float terrainHeight = WorldGenerator.GetNoise(worldX, 0);
+                terrainHeight = Mathf.FloorToInt(terrainHeight);
+                
+                for (int y = 0; y < chunk.height; y++)
                 {
-                    // TODO: Implement proper generation
-                    chunk._tileMap[x, y] = 1;
+                    if (y == (int) terrainHeight) chunk._tileMap[x, y] = TileManager.GetTileIdByName("Grass");
+                    else if (y <= (int) terrainHeight) chunk._tileMap[x, y] = TileManager.GetTileIdByName("Dirt");
                 }
             }
             

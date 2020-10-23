@@ -1,7 +1,8 @@
 ﻿{
   "tiles": [
-    { "id": 0, "name": "Dirt" },
-    { "id": 1, "name": "Stone" },
-    { "id": 2, "name": "Grass" }
+    { "id": 0, "name": "Air" },
+    { "id": 1, "name": "Dirt" },
+    { "id": 2, "name": "Stone" },
+    { "id": 3, "name": "Grass" }
   ]
 }
