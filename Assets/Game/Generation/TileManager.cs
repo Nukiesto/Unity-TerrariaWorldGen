@@ -1,16 +1,35 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Linq;
+using UnityEngine;
 
 namespace Game.Generation
 {
     public class TileManager : MonoBehaviour
     {
-        [SerializeField]
-        private Tile[] tiles;
+        // TODO: Make it readonly, and only assignable once
+        public static Tile[] Tiles;
 
         private void Awake()
         {
             var loadedTiles = TileLoader.LoadTiles();
-            tiles = loadedTiles;
+            Tiles = loadedTiles;
+        }
+
+        public static GameObject CreateTile(int id)
+        {
+            int tileIndex = Array.FindIndex(Tiles, check => check.id == id);
+            if (tileIndex == -1)
+            {
+                Debug.LogError("[ERROR] Cannot spawn tile");
+                return null;
+            }
+
+            Tile tile = Tiles[tileIndex];
+            GameObject tileObject = new GameObject(tile.name);
+            SpriteRenderer sr = tileObject.AddComponent<SpriteRenderer>();
+            sr.sprite = tile.sprite;
+
+            return tileObject;
         }
     }
 }

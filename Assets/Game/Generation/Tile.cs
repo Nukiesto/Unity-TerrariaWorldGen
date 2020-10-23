@@ -25,13 +25,13 @@ namespace Game.Generation
             try
             {
                 // Load all tiles in tiles.json
-                var stream = new StreamReader(Application.dataPath + "/tiles.json");
-                var contents = stream.ReadToEnd();
+                StreamReader stream = new StreamReader(Application.dataPath + "/tiles.json");
+                string contents = stream.ReadToEnd();
                 stream.Close();
 
                 // Create tile objects from all the tiles in the file
-                var tiles = JsonUtility.FromJson<Tiles>(contents);
-                foreach (var tile in tiles.tiles)
+                Tiles tiles = JsonUtility.FromJson<Tiles>(contents);
+                foreach (Tile tile in tiles.tiles)
                 {
                    tile.sprite = Resources.Load<Sprite>("Tiles/" + tile.name);
                    if (tile.sprite == null)
