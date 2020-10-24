@@ -215,8 +215,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 632311764}
-  - component: {fileID: 632311765}
-  - component: {fileID: 632311763}
+  - component: {fileID: 632311766}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -224,18 +223,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &632311763
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 632311762}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75ac6afff4ce46bf8c3676e463fc9821, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &632311764
 Transform:
   m_ObjectHideFlags: 0
@@ -250,7 +237,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &632311765
+--- !u!114 &632311766
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -259,16 +246,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 632311762}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcdc46581bbd4c869c20f4a2c70e2333, type: 3}
+  m_Script: {fileID: 11500000, guid: dd78c2f60251427aa40c7de0b4716bb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chunkWidth: 16
-  chunkHeight: 16
-  worldWidth: 5
-  worldHeight: 5
-  minDirtHeight: 3
-  maxDirtHeight: 8
-  frequency: 0.05
-  octaves: 2
-  lacunarity: 2
-  gain: 0.2
