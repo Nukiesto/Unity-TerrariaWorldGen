@@ -25,7 +25,8 @@ namespace Game.Generation
                     BindingFlags.InvokeMethod,
                     null,
                     genTaskObject,
-                    new object[] { genTasks });
+                    new object[] { genTasks }
+                );
             }
         }
 
