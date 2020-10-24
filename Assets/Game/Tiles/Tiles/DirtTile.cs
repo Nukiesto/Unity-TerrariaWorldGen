@@ -2,12 +2,12 @@
 
 namespace Game.Tiles.Tiles
 {
-    public class GrassTile : Tile
+    public class DirtTile : Tile
     {
         public override void SetDefaults()
         {
-            Name = "Grass";
-            Sprite = Resources.Load<Sprite>("Tiles/Grass");
+            Name = "Dirt";
+            Sprite = Resources.Load<Sprite>("Tiles/Dirt");
             
             base.SetDefaults();
         }

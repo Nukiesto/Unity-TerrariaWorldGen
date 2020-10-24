@@ -6,7 +6,7 @@ namespace Game.Tiles
     {
         public int Id = -1;
         public string Name;
-        protected Sprite Sprite;
+        public Sprite Sprite;
 
         public virtual void SetDefaults()
         {

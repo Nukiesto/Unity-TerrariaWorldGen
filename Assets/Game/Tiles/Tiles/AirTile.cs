@@ -1,14 +1,10 @@
-﻿using UnityEngine;
-
-namespace Game.Tiles.Tiles
+﻿namespace Game.Tiles.Tiles
 {
-    public class GrassTile : Tile
+    public class AirTile : Tile
     {
         public override void SetDefaults()
         {
-            Name = "Grass";
-            Sprite = Resources.Load<Sprite>("Tiles/Grass");
-            
+            Name = "Air";
             base.SetDefaults();
         }
 

@@ -4,7 +4,7 @@ namespace Game.Tiles
 {
     public class TileObject : MonoBehaviour
     {
-        private Tile _tile;
+        public Tile tile;
         // TODO: Complete implementation
     }
 }
