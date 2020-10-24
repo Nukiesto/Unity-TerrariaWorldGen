@@ -10,6 +10,9 @@ namespace Game.Generation
         public int id = -1;
         public string name;
         public Sprite sprite;
+
+        public int rarity = 100;
+        public int maxVeinSize = 1;
     }
 
     [Serializable]

@@ -3,6 +3,24 @@
     { "id": 0, "name": "Air" },
     { "id": 1, "name": "Dirt" },
     { "id": 2, "name": "Stone" },
-    { "id": 3, "name": "Grass" }
+    { "id": 3, "name": "Grass" },
+    {
+      "id": 4,
+      "name": "Coal Ore",
+      "rarity": 10,
+      "maxVeinSize": 6 
+    },
+    {
+      "id": 5,
+      "name": "Iron Ore",
+      "rarity": 6,
+      "maxVeinSize": 4
+    },
+    {
+      "id": 6,
+      "name": "Gold Ore",
+      "rarity": 1,
+      "maxVeinSize": 2
+    }
   ]
 }

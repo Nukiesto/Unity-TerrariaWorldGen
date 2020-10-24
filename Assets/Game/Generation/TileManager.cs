@@ -37,5 +37,11 @@ namespace Game.Generation
             int tileIndex = Array.FindIndex(Tiles, check => check.name == name);
             return tileIndex == -1 ? -1 : Tiles[tileIndex].id;
         }
+
+        public static Tile GetTileByName(string name)
+        {
+            int tileIndex = Array.FindIndex(Tiles, check => check.name == name);
+            return tileIndex == -1 ? null : Tiles[tileIndex];
+        }
     }
 }
