@@ -8,6 +8,9 @@ namespace Game.Tiles
         public string Name;
         public Sprite Sprite;
 
+        public int VeinSize;
+        public float Rarity;
+
         public virtual void SetDefaults()
         {
             Id = TileManager.AddTile(this);

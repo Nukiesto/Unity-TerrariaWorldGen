@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Game.Generation.GenTasks
+namespace Game.Generation
 {
     public abstract class GenTask
     {
