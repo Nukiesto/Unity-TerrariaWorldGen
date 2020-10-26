@@ -37,7 +37,7 @@ namespace Game.Tiles
             int tileId = Tiles.Count - 1;
             TileIds.Add(tile.Name, tileId);
                 
-            Debug.Log("Added tile: " + tile.Name);
+            // Debug.Log("Added tile: " + tile.Name);
 
             return tileId;
         }

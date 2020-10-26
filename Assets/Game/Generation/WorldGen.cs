@@ -87,26 +87,6 @@ namespace Game.Generation
             }
         }
 
-        private void Update()
-        {
-            // TODO: Temporary, used to quickly generate world without re-entering play mode
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                _noise  = new FastNoise(DateTime.Now.Millisecond.GetHashCode());
-                _noise.SetFrequency(frequency);
-                _noise.SetFractalOctaves(octaves);
-                _noise.SetFractalLacunarity(lacunarity);
-                _noise.SetFractalGain(gain);
-                _tileMap = new int[WorldWidth,WorldHeight];
-                // Executes all world gen tasks
-                foreach (GenPass task in _genTasks)
-                {
-                    Debug.Log(task.Name);
-                    task.Func();
-                }
-            }
-        }
-
         public static bool SetTile(int x, int y, int tileId)
         {
             if (x < 0 || x >= WorldWidth || y < 0 || y >= WorldHeight) return false;
@@ -118,6 +98,11 @@ namespace Game.Generation
         public static Tile GetTile(int x, int y)
         {
             return TileManager.GetTile(_tileMap[x, y]);
+        }
+
+        public static int[,] GetMap()
+        {
+            return _tileMap;
         }
         
         public static int GetNoise(int x, int y)

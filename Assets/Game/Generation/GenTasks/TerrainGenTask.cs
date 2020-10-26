@@ -21,7 +21,7 @@ namespace Game.Generation.GenTasks
                 {
                     if (y == surfaceHeight)
                         WorldGen.SetTile(x, y, TileManager.GetTile("Grass").Id);
-                    else if (y >= surfaceHeight - dirtHeight && y < surfaceHeight) // TODO: Randomise dirt height
+                    else if (y >= surfaceHeight - dirtHeight && y < surfaceHeight)
                         WorldGen.SetTile(x, y, TileManager.GetTile("Dirt").Id);
                     else if (y < surfaceHeight - dirtHeight)
                         WorldGen.SetTile(x, y, TileManager.GetTile("Stone").Id);
