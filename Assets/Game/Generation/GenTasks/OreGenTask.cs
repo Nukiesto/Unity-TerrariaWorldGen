@@ -7,7 +7,9 @@ namespace Game.Generation.GenTasks
     {
         public override void ModifyWorldGenTasks(List<GenPass> tasks)
         {
-            tasks.Insert(0, new GenPass("Ore Generation", OreGeneration));
+            // Ensures that the ores are generated once the caves have generated
+            int caveGenIndex = tasks.FindIndex(task => task.Name.Equals("Cave Generation"));
+            tasks.Insert(caveGenIndex + 1, new GenPass("Ore Generation", OreGeneration));
         }
 
         private bool OreGeneration()
@@ -38,6 +40,8 @@ namespace Game.Generation.GenTasks
             {
                 for (int oreY = y - tile.VeinSize; oreY <= y + tile.VeinSize; oreY++)
                 {
+                    if (WorldGen.GetTile(x, y).Name != "Stone") continue;
+
                     int shouldSpawn = WorldGen.GetRandom(0, 100);
                     if (shouldSpawn > 50) continue;
                     WorldGen.SetTile(oreX, oreY, tile.Id);

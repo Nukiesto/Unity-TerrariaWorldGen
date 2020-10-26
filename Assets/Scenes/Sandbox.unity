@@ -284,7 +284,6 @@ GameObject:
   - component: {fileID: 632311764}
   - component: {fileID: 632311766}
   - component: {fileID: 632311763}
-  - component: {fileID: 632311765}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -318,19 +317,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &632311765
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 632311762}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9468337c18ce45a093d13d29e35db93f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shader: {fileID: 7200000, guid: bde011750de00f74f811f01f50a35a97, type: 3}
 --- !u!114 &632311766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -344,11 +330,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   worldWidth: 512
-  worldHeight: 64
-  maxSurfaceHeight: 48
-  minSurfaceHeight: 28
-  minDirtHeight: 24
-  frequency: 0.08
+  worldHeight: 256
+  maxSurfaceHeight: 240
+  minSurfaceHeight: 220
+  minDirtHeight: 190
+  frequency: 0.04
   octaves: 2
   lacunarity: 1
   gain: 0.2
+  cavePercentage: 47
+  caveSmoothness: 5

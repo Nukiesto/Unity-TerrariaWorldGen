@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Game.Tiles;
+using UnityEngine;
 
 namespace Game.Generation.GenTasks
 {
@@ -14,14 +15,16 @@ namespace Game.Generation.GenTasks
         {
             for (int x = 0; x < WorldGen.WorldWidth; x++)
             {
-                int surfaceHeight = WorldGen.GetNoise(x, WorldGen.MaxSurfaceHeight);
-                int dirtHeight = WorldGen.GetRandom(WorldGen.MinDirtHeight, WorldGen.MinSurfaceHeight);
+                int surfaceHeight = WorldGen.MapToRange(WorldGen.GetNoise(x, WorldGen.MaxSurfaceHeight),
+                    -1, 1, WorldGen.MinSurfaceHeight, WorldGen.MaxSurfaceHeight);
+                int dirtHeight = WorldGen.MinSurfaceHeight - WorldGen.MapToRange(WorldGen.GetNoise(x, WorldGen.MinDirtHeight),
+                    -1, 1, WorldGen.MinDirtHeight, WorldGen.MinSurfaceHeight);
 
                 for (int y = 0; y < WorldGen.WorldHeight; y++)
                 {
                     if (y == surfaceHeight)
                         WorldGen.SetTile(x, y, TileManager.GetTile("Grass").Id);
-                    else if (y >= surfaceHeight - dirtHeight && y < surfaceHeight)
+                    else if (y >= WorldGen.MinSurfaceHeight - dirtHeight && y < surfaceHeight)
                         WorldGen.SetTile(x, y, TileManager.GetTile("Dirt").Id);
                     else if (y < surfaceHeight - dirtHeight)
                         WorldGen.SetTile(x, y, TileManager.GetTile("Stone").Id);

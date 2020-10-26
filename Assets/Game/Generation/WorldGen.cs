@@ -15,6 +15,8 @@ namespace Game.Generation
         public static int MaxSurfaceHeight { get; private set; }
         public static int MinSurfaceHeight { get; private set; }
         public static int MinDirtHeight { get; private set; }
+        public static int CavePercentage { get; private set; }
+        public static int CaveSmoothness { get; private set; }
         #endregion
 
         [Header("World Size Settings")]
@@ -30,11 +32,15 @@ namespace Game.Generation
         [SerializeField, Range(0.5f, 8f)] private float lacunarity = 2f;
         [SerializeField, Range(0.005f, 4f)] private float gain = 0.2f;
 
+        [Header("Cave Settings")]
+        [SerializeField, Range(0, 100)] private int cavePercentage = 50;
+        [SerializeField, Min(1)] private int caveSmoothness = 3;
+
         private readonly List<GenPass> _genTasks = new List<GenPass>();
         private static int[,] _tileMap;
         
         private static FastNoise _noise;
-        private static System.Random _psuedoNoise;
+        private static System.Random _pseudoNoise;
 
         private void Awake()
         {
@@ -48,7 +54,7 @@ namespace Game.Generation
             _noise.SetFractalLacunarity(lacunarity);
             _noise.SetFractalGain(gain);
             
-            _psuedoNoise = new System.Random(seed);
+            _pseudoNoise = new System.Random(seed);
             
             // Gets all world gen tasks, and adds them to the list
             Type taskType = typeof(GenTask);
@@ -73,6 +79,8 @@ namespace Game.Generation
             MaxSurfaceHeight = maxSurfaceHeight;
             MinSurfaceHeight = minSurfaceHeight;
             MinDirtHeight = minDirtHeight;
+            CavePercentage = cavePercentage;
+            CaveSmoothness = caveSmoothness;
             
             _tileMap = new int[WorldWidth, WorldHeight];
         }
@@ -105,21 +113,27 @@ namespace Game.Generation
             return _tileMap;
         }
         
-        public static int GetNoise(int x, int y)
+        public static float GetNoise(int x, int y)
         {
-            float noise = _noise.GetNoise(x, y);
-            
-            // Remaps the range of noise from (-1, 1) to (MinSurfaceHeight, MaxSurfaceHeight)
-            float normal = (noise + 1) / 2;
-            float toMaxAbs = MaxSurfaceHeight - MinSurfaceHeight;
-            float toAbs = toMaxAbs * normal;
-            
-            return Mathf.FloorToInt(toAbs + MinSurfaceHeight);
+            return _noise.GetNoise(x, y);
         }
 
         public static int GetRandom(int min, int max)
         {
-            return _psuedoNoise.Next(min, max);
+            return _pseudoNoise.Next(min, max);
+        }
+
+        public static int MapToRange(float from, int fromMin, int fromMax, int toMin, int toMax)
+        {
+            float fromAbs  =  from - fromMin;
+            float fromMaxAbs = fromMax - fromMin;      
+       
+            float normal = fromAbs / fromMaxAbs;
+ 
+            float toMaxAbs = toMax - toMin;
+            float toAbs = toMaxAbs * normal;
+
+            return Mathf.FloorToInt(toAbs + toMin);
         }
     }
 }
