@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 9f77569a1eb8bf74bbad4da96aad04b2, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -282,8 +282,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 632311764}
-  - component: {fileID: 632311766}
-  - component: {fileID: 632311763}
+  - component: {fileID: 632311765}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -291,18 +290,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &632311763
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 632311762}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 739503ecabc44969a291be678db53929, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &632311764
 Transform:
   m_ObjectHideFlags: 0
@@ -317,7 +304,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &632311766
+--- !u!114 &632311765
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -326,17 +313,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 632311762}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd78c2f60251427aa40c7de0b4716bb6, type: 3}
+  m_Script: {fileID: 11500000, guid: b01885f090a64dc7a6d38a42715f97bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldWidth: 512
-  worldHeight: 256
-  maxSurfaceHeight: 240
-  minSurfaceHeight: 220
-  minDirtHeight: 190
-  frequency: 0.04
-  octaves: 2
-  lacunarity: 1
-  gain: 0.2
-  cavePercentage: 47
-  caveSmoothness: 5
+  genSettings: {fileID: 11400000, guid: 4d0bf2de8544c9e4b80b6afd8869954f, type: 2}

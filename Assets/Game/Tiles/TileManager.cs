@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using UnityEngine;
 using Assembly = System.Reflection.Assembly;
 
 namespace Game.Tiles
 {
-    public class TileManager : MonoBehaviour
+    public static class TileManager
     {
-        private static readonly List<Tile> Tiles = new List<Tile>();
-        private static readonly Dictionary<string, int> TileIds = new Dictionary<string, int>();
+        private static List<Tile> _tiles = new List<Tile>();
+        private static Dictionary<string, int> _tileIds = new Dictionary<string, int>();
 
-        private void Awake()
+        public static void CreateTileSet()
         {
             Type tileType = typeof(Tile);
             Assembly assembly = Assembly.GetExecutingAssembly();
@@ -33,23 +32,21 @@ namespace Game.Tiles
 
         public static int AddTile(Tile tile)
         {
-            Tiles.Add(tile);
-            int tileId = Tiles.Count - 1;
-            TileIds.Add(tile.Name, tileId);
-                
-            // Debug.Log("Added tile: " + tile.Name);
+            _tiles.Add(tile);
+            int tileId = _tiles.Count - 1;
+            _tileIds.Add(tile.Name, tileId);
 
             return tileId;
         }
 
         public static Tile GetTile(string name)
         {
-            return GetTile(TileIds[name]);
+            return GetTile(_tileIds[name]);
         }
         
         public static Tile GetTile(int id)
         {
-            return Tiles[id];
+            return _tiles[id];
         }
     }
 }

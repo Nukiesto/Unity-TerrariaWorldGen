@@ -7,7 +7,7 @@ namespace Game.Tiles
         public int Id = -1;
         public string Name;
         public Sprite Sprite;
-
+        
         public int VeinSize;
         public float Rarity;
 

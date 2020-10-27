@@ -2,61 +2,36 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Game.Core;
 using Game.Tiles;
 using UnityEngine;
 
 namespace Game.Generation
 {
-    public class WorldGen : MonoBehaviour
+    public class WorldGen
     {
-        #region Static World Settings
-        public static int WorldWidth { get; private set; }
-        public static int WorldHeight { get; private set; }
-        public static int MaxSurfaceHeight { get; private set; }
-        public static int MinSurfaceHeight { get; private set; }
-        public static int MinDirtHeight { get; private set; }
-        public static int CavePercentage { get; private set; }
-        public static int CaveSmoothness { get; private set; }
-        #endregion
-
-        [Header("World Size Settings")]
-        [SerializeField] private int worldWidth = 32;
-        [SerializeField] private int worldHeight = 64;
-        [SerializeField] private int maxSurfaceHeight = 48;
-        [SerializeField] private int minSurfaceHeight = 16;
-        [SerializeField] private int minDirtHeight = 8;
-        
-        [Header("Noise Settings")]
-        [SerializeField, Min(0.001f)] private float frequency = 0.2f;
-        [SerializeField, Range(1, 8)] private int octaves = 2;
-        [SerializeField, Range(0.5f, 8f)] private float lacunarity = 2f;
-        [SerializeField, Range(0.005f, 4f)] private float gain = 0.2f;
-
-        [Header("Cave Settings")]
-        [SerializeField, Range(0, 100)] private int cavePercentage = 50;
-        [SerializeField, Min(1)] private int caveSmoothness = 3;
-
         private readonly List<GenPass> _genTasks = new List<GenPass>();
         private static int[,] _tileMap;
         
         private static FastNoise _noise;
         private static System.Random _pseudoNoise;
 
-        private void Awake()
+        public int[,] GenerateWorld()
         {
+            _tileMap = new int[World.GenSettings.worldWidth, World.GenSettings.worldHeight];
             // Initialize noise
             int seed = DateTime.Now.Millisecond.GetHashCode();
             
             _noise  = new FastNoise(seed);
             _noise.SetNoiseType(FastNoise.NoiseType.Perlin);
-            _noise.SetFrequency(frequency);
-            _noise.SetFractalOctaves(octaves);
-            _noise.SetFractalLacunarity(lacunarity);
-            _noise.SetFractalGain(gain);
+            _noise.SetFrequency(World.GenSettings.frequency);
+            _noise.SetFractalOctaves(World.GenSettings.octaves);
+            _noise.SetFractalLacunarity(World.GenSettings.lacunarity);
+            _noise.SetFractalGain(World.GenSettings.gain);
             
             _pseudoNoise = new System.Random(seed);
             
-            // Gets all world gen tasks, and adds them to the list
+            // Gets all world gen tasks, and adds them to the list to do
             Type taskType = typeof(GenTask);
             Assembly assembly = Assembly.GetExecutingAssembly();
             var tasks = assembly.GetTypes().Where(t => t.IsSubclassOf(taskType));
@@ -73,31 +48,19 @@ namespace Game.Generation
                 );
             }
             
-            // Assign all world settings to their static counterparts
-            WorldWidth = worldWidth;
-            WorldHeight = worldHeight;
-            MaxSurfaceHeight = maxSurfaceHeight;
-            MinSurfaceHeight = minSurfaceHeight;
-            MinDirtHeight = minDirtHeight;
-            CavePercentage = cavePercentage;
-            CaveSmoothness = caveSmoothness;
-            
-            _tileMap = new int[WorldWidth, WorldHeight];
-        }
-
-        private void Start()
-        {
             // Executes all world gen tasks
             foreach (GenPass task in _genTasks)
             {
                 Debug.Log(task.Name);
                 task.Func();
             }
+
+            return _tileMap;
         }
 
         public static bool SetTile(int x, int y, int tileId)
         {
-            if (x < 0 || x >= WorldWidth || y < 0 || y >= WorldHeight) return false;
+            if (x < 0 || x >= World.GenSettings.worldWidth || y < 0 || y >= World.GenSettings.worldHeight) return false;
             
             _tileMap[x, y] = tileId;
             return true;
@@ -108,11 +71,6 @@ namespace Game.Generation
             return TileManager.GetTile(_tileMap[x, y]);
         }
 
-        public static int[,] GetMap()
-        {
-            return _tileMap;
-        }
-        
         public static float GetNoise(int x, int y)
         {
             return _noise.GetNoise(x, y);

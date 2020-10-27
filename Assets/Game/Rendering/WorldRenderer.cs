@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Game.Core;
 using Game.Generation;
 using Game.Tiles;
 using UnityEngine;
@@ -7,8 +8,6 @@ namespace Game.Rendering
 {
     public class WorldRenderer : MonoBehaviour
     {
-        public static Vector2Int RenderBox { get; private set; }
-        
         [SerializeField] private Transform target = null;
         [SerializeField, Min(8)] private int renderDistance = 16;
         
@@ -19,8 +18,7 @@ namespace Game.Rendering
         {
             if (target == null)
                 target = Camera.main.transform;
-
-            RenderBox = new Vector2Int(renderDistance + 1, renderDistance + 1);
+            
             RenderedTiles = new Dictionary<Vector2Int, TileObject>();
             
             // Create all the tiles that will be needed for the rendering - used for object pooling
@@ -65,9 +63,9 @@ namespace Game.Rendering
                 {
                     Vector2Int position = new Vector2Int(x, y);
                     if (RenderedTiles.ContainsKey(position)) continue;
-                    if (x < 0 || x >= WorldGen.WorldWidth || y < 0  || y >= WorldGen.WorldHeight) continue;
+                    if (x < 0 || x >= World.GenSettings.worldWidth || y < 0  || y >= World.GenSettings.worldHeight) continue;
 
-                    Tile tile = WorldGen.GetTile(x, y);
+                    Tile tile = World.Data.GetTile(x, y);
                     TileObject tileObject = _inactiveTiles.Dequeue();
                     tileObject.UpdateTile(tile);
                     tileObject.transform.position = new Vector3(x, y, 0);
