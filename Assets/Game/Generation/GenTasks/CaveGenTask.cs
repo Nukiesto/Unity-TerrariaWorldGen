@@ -16,8 +16,8 @@ namespace Game.Generation.GenTasks
         private int _height;
         private bool GenerateCaveSystems()
         {
-            _width = World.GenSettings.worldWidth;
-            _height = World.GenSettings.minDirtHeight;
+            _width = WorldGen.GenSettings.worldWidth;
+            _height = WorldGen.GenSettings.minDirtHeight;
             _map = new int[_width, _height];
             
             // Randomly fills map
@@ -25,12 +25,12 @@ namespace Game.Generation.GenTasks
             {
                 for (int y = 0; y < _height; y++)
                 {
-                    _map[x, y] = (WorldGen.GetRandom(0, 100) < World.GenSettings.cavePercentage) ? 0 : 1;
+                    _map[x, y] = (WorldGen.GetRandom(0, 100) < WorldGen.GenSettings.cavePercentage) ? 0 : 1;
                 }
             }
             
             // Smooth map
-            for (int i = 0; i < World.GenSettings.caveSmoothness; i++)
+            for (int i = 0; i < WorldGen.GenSettings.caveSmoothness; i++)
             {
                 SmoothMap();
             }

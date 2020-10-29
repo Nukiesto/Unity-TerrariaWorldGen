@@ -14,20 +14,20 @@ namespace Game.Generation.GenTasks
 
         private bool TerrainGeneration()
         {
-            for (int x = 0; x < World.GenSettings.worldWidth; x++)
+            for (int x = 0; x < WorldGen.GenSettings.worldWidth; x++)
             {
-                int surfaceHeight = WorldGen.MapToRange(WorldGen.GetNoise(x, World.GenSettings.maxSurfaceHeight),
-                    -1, 1, World.GenSettings.minSurfaceHeight, World.GenSettings.maxSurfaceHeight);
-                int dirtHeight = World.GenSettings.minSurfaceHeight -
-                                 WorldGen.MapToRange(WorldGen.GetNoise(x, World.GenSettings.minDirtHeight), 
+                int surfaceHeight = WorldGen.MapToRange(WorldGen.GetNoise(x, WorldGen.GenSettings.maxSurfaceHeight),
+                    -1, 1, WorldGen.GenSettings.minSurfaceHeight, WorldGen.GenSettings.maxSurfaceHeight);
+                int dirtHeight = WorldGen.GenSettings.minSurfaceHeight -
+                                 WorldGen.MapToRange(WorldGen.GetNoise(x, WorldGen.GenSettings.minDirtHeight), 
                                      -1, 1,
-                                     World.GenSettings.minDirtHeight, World.GenSettings.minSurfaceHeight);
+                                     WorldGen.GenSettings.minDirtHeight, WorldGen.GenSettings.minSurfaceHeight);
 
-                for (int y = 0; y < World.GenSettings.worldHeight; y++)
+                for (int y = 0; y < WorldGen.GenSettings.worldHeight; y++)
                 {
                     if (y == surfaceHeight)
                         WorldGen.SetTile(x, y, TileManager.GetTile("Grass").Id);
-                    else if (y >= World.GenSettings.minSurfaceHeight - dirtHeight && y < surfaceHeight)
+                    else if (y >= WorldGen.GenSettings.minSurfaceHeight - dirtHeight && y < surfaceHeight)
                         WorldGen.SetTile(x, y, TileManager.GetTile("Dirt").Id);
                     else if (y < surfaceHeight - dirtHeight)
                         WorldGen.SetTile(x, y, TileManager.GetTile("Stone").Id);

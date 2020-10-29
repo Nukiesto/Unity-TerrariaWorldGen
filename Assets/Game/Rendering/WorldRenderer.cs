@@ -63,7 +63,7 @@ namespace Game.Rendering
                 {
                     Vector2Int position = new Vector2Int(x, y);
                     if (RenderedTiles.ContainsKey(position)) continue;
-                    if (x < 0 || x >= World.GenSettings.worldWidth || y < 0  || y >= World.GenSettings.worldHeight) continue;
+                    if (x < 0 || x >= World.Data.Width || y < 0  || y >= World.Data.Height) continue;
 
                     Tile tile = World.Data.GetTile(x, y);
                     TileObject tileObject = _inactiveTiles.Dequeue();

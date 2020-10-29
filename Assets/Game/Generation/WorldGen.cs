@@ -10,24 +10,27 @@ namespace Game.Generation
 {
     public class WorldGen
     {
+        public static WorldGenSettings GenSettings = null;
+        
         private readonly List<GenPass> _genTasks = new List<GenPass>();
         private static int[,] _tileMap;
         
         private static FastNoise _noise;
         private static System.Random _pseudoNoise;
 
-        public int[,] GenerateWorld()
+        public int[,] GenerateWorld(WorldGenSettings genSettings)
         {
-            _tileMap = new int[World.GenSettings.worldWidth, World.GenSettings.worldHeight];
+            GenSettings = genSettings;
+            _tileMap = new int[GenSettings.worldWidth, GenSettings.worldHeight];
             // Initialize noise
             int seed = DateTime.Now.Millisecond.GetHashCode();
             
             _noise  = new FastNoise(seed);
             _noise.SetNoiseType(FastNoise.NoiseType.Perlin);
-            _noise.SetFrequency(World.GenSettings.frequency);
-            _noise.SetFractalOctaves(World.GenSettings.octaves);
-            _noise.SetFractalLacunarity(World.GenSettings.lacunarity);
-            _noise.SetFractalGain(World.GenSettings.gain);
+            _noise.SetFrequency(GenSettings.frequency);
+            _noise.SetFractalOctaves(GenSettings.octaves);
+            _noise.SetFractalLacunarity(GenSettings.lacunarity);
+            _noise.SetFractalGain(GenSettings.gain);
             
             _pseudoNoise = new System.Random(seed);
             
@@ -60,7 +63,7 @@ namespace Game.Generation
 
         public static bool SetTile(int x, int y, int tileId)
         {
-            if (x < 0 || x >= World.GenSettings.worldWidth || y < 0 || y >= World.GenSettings.worldHeight) return false;
+            if (x < 0 || x >= GenSettings.worldWidth || y < 0 || y >= GenSettings.worldHeight) return false;
             
             _tileMap[x, y] = tileId;
             return true;

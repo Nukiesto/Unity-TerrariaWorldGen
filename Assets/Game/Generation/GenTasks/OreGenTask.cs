@@ -19,9 +19,9 @@ namespace Game.Generation.GenTasks
             Tile iron = TileManager.GetTile("Iron Ore");
             Tile gold = TileManager.GetTile("Gold Ore");
             
-            for (int x = 0; x < World.GenSettings.worldWidth; x += WorldGen.GetRandom(1, 5))
+            for (int x = 0; x < WorldGen.GenSettings.worldWidth; x += WorldGen.GetRandom(1, 5))
             {
-                for (int y = 0; y < World.GenSettings.minDirtHeight; y += WorldGen.GetRandom(1, 5))
+                for (int y = 0; y < WorldGen.GenSettings.minDirtHeight; y += WorldGen.GetRandom(1, 5))
                 {
                     if (WorldGen.GetTile(x, y).Name == "Dirt") continue;
                     
