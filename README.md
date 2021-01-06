@@ -1,5 +1,5 @@
 # Unity Terraria-like World Gen [Abandoned]
-Easily extendable Unity Terraria-like world generation
+Easily extensible Unity Terraria-like world generation
 
 ## Features
 - Tile and block management
