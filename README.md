@@ -41,7 +41,8 @@ public class CustomTile : Tile
         public override void SetDefaults()
         {
             Name = "CustomTile";
-            Sprite = Resources.Load<Sprite>("Tiles/CustomSprite"); // Load the sprite from the resources folder
+            // Load the sprite from the resources folder
+            Sprite = Resources.Load<Sprite>("Tiles/CustomSprite");
             
             // Sets the tile's Id and adds it to the TileManager
             base.SetDefaults();
